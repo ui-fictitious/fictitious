@@ -90,10 +90,14 @@
 
     <!-- Header Section -->
     <header class="glass-card fixed top-0 left-0 right-0 z-10 shadow-lg">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-3 text-2xl font-bold text-white hover:text-cyan-300 transition-colors">
-                <img src="logo.png" alt="logo" class="h-8 w-8 rounded-full">
-                <span>fictitious</span>
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- UPDATED: Added tagline -->
+            <a href="index.html" class="flex items-center space-x-3 text-white hover:text-cyan-300 transition-colors">
+                <img src="logo.png" alt="logo" class="h-10 w-10 rounded-full self-center">
+                <div>
+                    <span class="text-xl font-bold leading-tight">fictitious</span>
+                    <span class="block text-xs text-slate-300 leading-tight">a boy lost in the cosmos</span>
+                </div>
             </a>
             
             <!-- Desktop Navigation -->
@@ -145,7 +149,7 @@
             </div>
         </section>
         
-        <!-- NEW: Recent Blogs Section (Placeholder) -->
+        <!-- Recent Blogs Section (Placeholder) -->
         <section id="blogs" class="py-20 px-4">
             <div class="container mx-auto text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-12">Recent Blogs</h2>
@@ -165,13 +169,12 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // --- NEW: Background Transition on Scroll ---
+        // --- Background Transition on Scroll ---
         const starfield = document.getElementById('starfield');
         const riverBg = document.getElementById('river-bg');
         const heroSection = document.getElementById('home');
 
         window.addEventListener('scroll', () => {
-            // The point at which the fade should be complete (e.g., 60% of the window height)
             const triggerPoint = window.innerHeight * 0.6;
             const scrollY = window.scrollY;
 
@@ -186,7 +189,7 @@
 
 
         // --- Animated Starfield Background Script ---
-        const canvas = starfield; // Use the starfield variable we already have
+        const canvas = starfield;
         const ctx = canvas.getContext('2d');
         const numStars = 500;
         const stars = [];
@@ -232,15 +235,15 @@
             }
         }
 
-        function animate() {
+        function animateStars() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             updateStars();
             stars.forEach(drawStar);
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateStars);
         }
 
         setCanvasSize();
-        animate();
+        animateStars();
     </script>
 
 </body>
