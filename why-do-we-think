@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why do we think? - fictitious</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Lora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles for the page */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Solid black background */
+        }
+        .prose { /* Styling for the blog content */
+            font-family: 'Lora', serif;
+        }
+        
+        /* UPDATED: Styles for the fluid footer */
+        #fluid-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px; /* Height of the fluid strip */
+            z-index: 0;
+            pointer-events: none; /* Ensure it doesn't block content */
+        }
+        /* NEW: Gradient overlay for a smooth transition from black to color */
+        #fluid-footer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+        }
+        #fluid-background {
+            width: 100%;
+            height: 100%;
+        }
+
+        .glass-card {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- Header Section -->
+    <header class="glass-card fixed top-0 left-0 right-0 z-20 shadow-lg">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-3 text-white hover:text-cyan-300 transition-colors">
+                <img src="logo.png" alt="logo" class="h-10 w-10 rounded-full self-center">
+                <div>
+                    <span class="text-xl font-bold leading-tight">fictitious</span>
+                    <span class="block text-xs text-slate-300 leading-tight">a boy lost in the cosmos</span>
+                </div>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-slate-200 hover:text-cyan-300 transition-colors">Home</a>
+                <a href="about.html" class="text-slate-200 hover:text-cyan-300 transition-colors">About</a>
+                <a href="blog.html" class="text-slate-200 hover:text-cyan-300 transition-colors">Blog</a>
+                <a href="index.html#projects" class="text-slate-200 hover:text-cyan-300 transition-colors">Projects</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="index.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Home</a>
+            <a href="about.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">About</a>
+            <a href="blog.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Blog</a>
+            <a href="index.html#projects" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Projects</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="pt-32 pb-32 relative z-10">
+        <div class="container mx-auto px-4">
+            <article class="glass-card w-full max-w-3xl mx-auto rounded-2xl shadow-2xl p-8 md:p-12">
+                <!-- Post Header -->
+                <div class="text-center mb-8">
+                    <p class="text-sm text-cyan-400">Philosophy • May 20, 2025</p>
+                    <h1 class="text-3xl md:text-4xl font-bold text-white mt-2">why do we think ?</h1>
+                </div>
+
+                <!-- Post Content -->
+                <div class="prose prose-invert max-w-none text-slate-300 leading-relaxed">
+                    <p>Few days back in a state of deep thought, a question came in my mind that, why am i even thinking so much ? what is the need of thinking deeply about something ? And then this lead me to an amazing and interesting journey of finding the answer to my question that is “why do we think ? ” .</p>
+                    <p>And here’s what I found :-</p>
+                    <p>So, let’s first understand, how our mind works. Basically, our mind is divided into two parts one that is <strong>conscious</strong> but lazy and another that is <strong>subconscious</strong> but active. Our mind always tries to do things in minimal energy uses, we can say that it is as lazy, as an orange cat sleeping on a couch !! Hence for most of the work, that we do in our daily life we rely on the <em>later</em> one, as most of our daily life is repetitive and doesn’t need much thinking and mental energy. But due to this we are also prone to making mistakes. The <em>former</em> one kicks in when we are in trouble, Like a complex life situation Or solving a maths problem Or dealing with something which is new to us and requires deep thinking. So, there is a constant oscillation between mental autopilot and deliberate reflection.</p>
+                    
+                    <blockquote class="border-l-4 border-cyan-400 pl-4 italic text-slate-400">
+                        <p>Rene Descartes who is also known as father of modern philosophy said – “cogito, ergo sum” which translates as “I think therefore I am”.</p>
+                    </blockquote>
+                    
+                    <p>Biologically, Thinking evolved because it gave us an advantage and helped early humans in various ways like:</p>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>To anticipate threats</li>
+                        <li>Solve problems</li>
+                        <li>Coordinate with others</li>
+                    </ul>
+                    <p>Which helped them to survive.</p>
+                    
+                    <p>Where as, Philosophically, this question takes a quite interesting approach. It’s not just about how our brain works, but also to know what it means to be a human, to be aware, to seek meaning and to live consciously.</p>
+                    
+                    <p>There are different thoughts about it, let’s look at few of them :-</p>
+                    <p>For <strong>Descartes</strong>, doubt was the beginning of understanding something. He was strongly in favor of doubting everything, Like our senses, the outer world etc. According to him, one thing that can’t be doubted is ‘Thinking’.</p>
+                    <p>According to <strong>Emmanuel Kant</strong>, our minds are active structures that shapes reality. We never access things as they are, directly. Our minds impose certain concepts to understand certain things around us.</p>
+                    <p>There is a theory in existential philosophy that we humans have free-will, because we can think and act accordingly.</p>
+                    
+                    <p>So, by this we can conclude that we think not only just for survival, but also to make sense of this otherwise meaningless life, to make choices and most importantly to solve problems of physics, mathematics and philosophy !!</p>
+                </div>
+
+                <div class="mt-12 text-center">
+                    <a href="blog.html" class="font-semibold text-cyan-400 hover:text-cyan-200 transition-colors">&larr; Back to all posts</a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Fluid Footer -->
+    <footer id="fluid-footer">
+        <canvas id="fluid-background"></canvas>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle Script ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Fluid Background Script for Footer ---
+        const canvas = document.getElementById('fluid-background');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let time = 0;
+        let currentColor = { r: 12, g: 10, b: 29 };
+        const footerHeight = 80;
+
+        function setCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = footerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.radius = Math.random() * 30 + 15;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width + this.radius || this.x < -this.radius) { this.speedX *= -1; }
+                if (this.y > canvas.height + this.radius || this.y < -this.radius) { this.speedY *= -1; }
+            }
+            draw() {
+                ctx.beginPath();
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                gradient.addColorStop(0, `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.6)`);
+                gradient.addColorStop(1, `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0)`);
+                ctx.fillStyle = gradient;
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 30; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function handleParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+        }
+
+        function updateColorOverTime() {
+            time += 0.003; // Speed of color change
+            const r = Math.abs(Math.sin(time * 0.8 + 0)) * 100 + 10;
+            const g = Math.abs(Math.sin(time * 0.5 + 2)) * 80 + 10;
+            const b = Math.abs(Math.sin(time * 0.3 + 4)) * 150 + 50;
+            currentColor = { r: Math.round(r), g: Math.round(g), b: Math.round(b) };
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            updateColorOverTime();
+            handleParticles();
+            requestAnimationFrame(animate);
+        }
+        
+        window.addEventListener('resize', () => {
+            setCanvasSize();
+            initParticles();
+        });
+
+        setCanvasSize();
+        initParticles();
+        animate();
+    </script>
+</body>
+</html>
