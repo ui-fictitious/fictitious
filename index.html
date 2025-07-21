@@ -48,7 +48,6 @@
     <header class="glass-card fixed top-0 left-0 right-0 z-10 shadow-lg">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-3 text-2xl font-bold text-white hover:text-cyan-300 transition-colors">
-                <!-- FIX: Logo now points to the local file in your repository -->
                 <img src="logo.png" alt="logo" class="h-8 w-8 rounded-full">
                 <span>fictitious</span>
             </a>
@@ -57,6 +56,7 @@
             <nav class="hidden md:flex space-x-8">
                 <a href="#" class="text-slate-200 hover:text-cyan-300 transition-colors">Home</a>
                 <a href="#about" class="text-slate-200 hover:text-cyan-300 transition-colors">About</a>
+                <a href="#blog" class="text-slate-200 hover:text-cyan-300 transition-colors">Blog</a>
                 <a href="#projects" class="text-slate-200 hover:text-cyan-300 transition-colors">Projects</a>
                 <a href="#contact" class="text-slate-200 hover:text-cyan-300 transition-colors">Contact</a>
             </nav>
@@ -73,6 +73,7 @@
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="#" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Home</a>
             <a href="#about" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">About</a>
+            <a href="#blog" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Blog</a>
             <a href="#projects" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Projects</a>
             <a href="#contact" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Contact</a>
         </div>
@@ -120,6 +121,42 @@
             </div>
         </section>
         
+        <!-- Blog Section -->
+        <section id="blog" class="py-20 px-4">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-12">Latest Posts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Blog Post 1 -->
+                    <div class="glass-card rounded-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <div class="p-6">
+                            <p class="text-sm text-cyan-300 mb-2">July 22, 2025</p>
+                            <h3 class="text-xl font-bold text-white mb-3">The Mysteries of Dark Energy</h3>
+                            <p class="text-slate-300 text-sm mb-4">A brief dive into what we know (and mostly what we don't) about the force accelerating the expansion of our universe.</p>
+                            <a href="#" class="font-semibold text-cyan-400 hover:text-cyan-200 transition-colors">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Blog Post 2 -->
+                    <div class="glass-card rounded-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <div class="p-6">
+                            <p class="text-sm text-cyan-300 mb-2">July 15, 2025</p>
+                            <h3 class="text-xl font-bold text-white mb-3">Simulating a Supernova</h3>
+                            <p class="text-slate-300 text-sm mb-4">The computational challenges and incredible insights gained from modeling the explosive death of a star.</p>
+                            <a href="#" class="font-semibold text-cyan-400 hover:text-cyan-200 transition-colors">Read More &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Blog Post 3 -->
+                    <div class="glass-card rounded-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                        <div class="p-6">
+                            <p class="text-sm text-cyan-300 mb-2">July 08, 2025</p>
+                            <h3 class="text-xl font-bold text-white mb-3">First Steps in Radio Astronomy</h3>
+                            <p class="text-slate-300 text-sm mb-4">My initial experiences with capturing the faint whispers of the cosmos using a simple radio telescope setup.</p>
+                            <a href="#" class="font-semibold text-cyan-400 hover:text-cyan-200 transition-colors">Read More &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- You can add other sections like Projects and Contact here -->
         <!-- 
         <section id="projects" class="min-h-screen">...</section>
@@ -199,4 +236,3 @@
 
 </body>
 </html>
-    
