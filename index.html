@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - Astrophysics Theme</title>
+    <title>fictitious - Portfolio</title>
     
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,7 +17,7 @@
         /* Custom styles for the page */
         body {
             font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Prevents scrollbars from the canvas */
+            /* Allow scrolling now that we have more content */
         }
         
         /* Style for the canvas background */
@@ -30,9 +30,9 @@
             z-index: -1; /* Place canvas behind all other content */
         }
 
-        /* Glassmorphism effect for the card */
+        /* Glassmorphism effect for shared elements */
         .glass-card {
-            background: rgba(17, 24, 39, 0.6); /* Semi-transparent dark background */
+            background: rgba(17, 24, 39, 0.7); /* Slightly more opaque for readability */
             backdrop-filter: blur(10px); /* Frosted glass effect */
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
@@ -44,99 +44,141 @@
     <!-- The animated starry background will be rendered here -->
     <canvas id="starfield"></canvas>
 
-    <!-- Main content container -->
-    <div class="min-h-screen flex items-center justify-center p-4">
-        
-        <!-- The main 'About Me' card -->
-        <div class="glass-card w-full max-w-4xl rounded-2xl shadow-2xl p-8 md:p-12 transform hover:scale-105 transition-transform duration-500">
+    <!-- Header Section -->
+    <header class="glass-card fixed top-0 left-0 right-0 z-10 shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 text-2xl font-bold text-white hover:text-cyan-300 transition-colors">
+                <!-- FIX: Logo now points to the local file in your repository -->
+                <img src="logo.png" alt="logo" class="h-8 w-8 rounded-full">
+                <span>fictitious</span>
+            </a>
             
-            <div class="flex flex-col items-center gap-8">
-                
-                <!-- Text Content Section -->
-                <div class="text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">
-                        Kumar Shivam
-                    </h1>
-                    <p class="text-lg text-cyan-300 font-medium mb-4">
-                        Aspiring Astrophysicist & Future Explorer
-                    </p>
-                    <p class="text-slate-300 leading-relaxed max-w-2xl mx-auto">
-                        <!-- Edit this text to tell your story! -->
-                        Ever since I first looked up at the night sky, I've been captivated by the vastness of the cosmos. My journey is driven by a deep passion for understanding the universe—from the lifecycle of stars to the mysteries of dark matter. My goal is to contribute to the field of computational astrophysics, developing models that help us unravel celestial mechanics and cosmic evolution. This website is a small part of my journey to the stars.
-                    </p>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-slate-200 hover:text-cyan-300 transition-colors">Home</a>
+                <a href="#about" class="text-slate-200 hover:text-cyan-300 transition-colors">About</a>
+                <a href="#projects" class="text-slate-200 hover:text-cyan-300 transition-colors">Projects</a>
+                <a href="#contact" class="text-slate-200 hover:text-cyan-300 transition-colors">Contact</a>
+            </nav>
 
-                    <!-- Social Media Links -->
-                    <div class="mt-6 flex justify-center space-x-4">
-                        <!-- GitHub link -->
-                        <a href="https://github.com/ui-fictitious/" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300" aria-label="GitHub">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
-                        </a>
-                        <!-- LinkedIn link -->
-                        <a href="https://www.linkedin.com/in/aboylostinthecosmos" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300" aria-label="LinkedIn">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
-                        </a>
-                        <!-- Instagram link -->
-                        <a href="https://www.instagram.com/aboylostincosmos/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300" aria-label="Instagram">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg>
-                        </a>
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Home</a>
+            <a href="#about" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">About</a>
+            <a href="#projects" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Projects</a>
+            <a href="#contact" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Contact</a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- About Me Section -->
+        <section id="about" class="min-h-screen flex items-center justify-center p-4 pt-24">
+            <!-- The main 'About Me' card -->
+            <div class="glass-card w-full max-w-4xl rounded-2xl shadow-2xl p-8 md:p-12 transform hover:scale-105 transition-transform duration-500">
+                
+                <div class="flex flex-col items-center gap-8">
+                    
+                    <!-- Text Content Section -->
+                    <div class="text-center">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">
+                            Kumar Shivam
+                        </h1>
+                        <p class="text-lg text-cyan-300 font-medium mb-4">
+                            Aspiring Astrophysicist & Future Explorer
+                        </p>
+                        <p class="text-slate-300 leading-relaxed max-w-2xl mx-auto">
+                            <!-- Edit this text to tell your story! -->
+                            Ever since I first looked up at the night sky, I've been captivated by the vastness of the cosmos. My journey is driven by a deep passion for understanding the universe—from the lifecycle of stars to the mysteries of dark matter. My goal is to contribute to the field of computational astrophysics, developing models that help us unravel celestial mechanics and cosmic evolution. This website is a small part of my journey to the stars.
+                        </p>
+
+                        <!-- Social Media Links -->
+                        <div class="mt-6 flex justify-center space-x-4">
+                            <!-- GitHub link -->
+                            <a href="https://github.com/ui-fictitious/" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300" aria-label="GitHub">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
+                            </a>
+                            <!-- LinkedIn link -->
+                            <a href="https://www.linkedin.com/in/aboylostinthecosmos" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300" aria-label="LinkedIn">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" /></svg>
+                            </a>
+                            <!-- Instagram link -->
+                            <a href="https://www.instagram.com/aboylostincosmos/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-cyan-400 transition-colors duration-300" aria-label="Instagram">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44 1.441-.645 1.441-1.44-.645-1.44-1.441-1.44z"/></svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+        
+        <!-- You can add other sections like Projects and Contact here -->
+        <!-- 
+        <section id="projects" class="min-h-screen">...</section>
+        <section id="contact" class="min-h-screen">...</section>
+        -->
+
+    </main>
 
     <script>
-        // --- Animated Starfield Background Script ---
+        // --- Mobile Menu Toggle Script ---
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
 
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+
+        // --- Animated Starfield Background Script ---
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
 
-        // Moved star variables to the top to ensure they are initialized before use.
-        const numStars = 500; // Number of stars
+        const numStars = 500;
         const stars = [];
 
-        // Set canvas dimensions and adjust on window resize
         function setCanvasSize() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            createStars(); // Re-create stars for the new size
+            createStars();
         }
         
         window.addEventListener('resize', setCanvasSize);
 
-        // --- Star creation and animation logic ---
-
-        // Star object properties
         function createStars() {
-            stars.length = 0; // Clear existing stars on resize
+            stars.length = 0;
             for (let i = 0; i < numStars; i++) {
                 stars.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
-                    radius: Math.random() * 1.5 + 0.5, // Star size
-                    // Velocity for parallax effect
+                    radius: Math.random() * 1.5 + 0.5,
                     vx: Math.random() * 0.2 - 0.1,
                     vy: Math.random() * 0.2 - 0.1
                 });
             }
         }
 
-        // Function to draw a single star
         function drawStar(star) {
             ctx.beginPath();
             ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)'; // Star color
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
             ctx.fill();
         }
 
-        // Function to update star positions
         function updateStars() {
             for (let i = 0; i < stars.length; i++) {
                 const star = stars[i];
                 star.x += star.vx;
                 star.y += star.vy;
 
-                // Wrap stars around the screen
                 if (star.x < 0) star.x = canvas.width;
                 if (star.x > canvas.width) star.x = 0;
                 if (star.y < 0) star.y = canvas.height;
@@ -144,24 +186,17 @@
             }
         }
 
-        // --- Main Animation Loop ---
         function animate() {
-            // Clear the canvas for the next frame
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Update and draw all stars
             updateStars();
             stars.forEach(drawStar);
-
-            // Request the next frame
             requestAnimationFrame(animate);
         }
 
-        // Initialize and start the animation
-        // Moved the initial call to setCanvasSize here to ensure all functions and variables are defined.
         setCanvasSize();
         animate();
     </script>
 
 </body>
 </html>
+    
