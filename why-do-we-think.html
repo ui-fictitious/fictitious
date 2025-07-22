@@ -11,7 +11,7 @@
     <!-- Google Fonts: Inter & Lora -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
         /* Custom styles for the page */
@@ -31,9 +31,9 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 80px; /* Height of the fluid strip */
+            height: 80px;
             z-index: 0;
-            pointer-events: none; /* Ensure it doesn't block content */
+            pointer-events: none;
         }
         #fluid-footer::after {
             content: '';
@@ -60,7 +60,7 @@
 <body class="text-white">
 
     <!-- Header Section -->
-    <header class="glass-card fixed top-0 left-0 right-0 z-20 shadow-lg">
+    <header class="glass-card fixed top-0 left-0 right-0 z-30 shadow-lg">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="index.html" class="flex items-center space-x-3 text-white hover:text-cyan-300 transition-colors">
                 <img src="logo.png" alt="logo" class="h-10 w-10 rounded-full self-center">
@@ -69,24 +69,18 @@
                     <span class="block text-xs text-slate-300 leading-tight">a boy lost in the cosmos</span>
                 </div>
             </a>
-            
-            <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-8">
                 <a href="index.html" class="text-slate-200 hover:text-cyan-300 transition-colors">Home</a>
                 <a href="about.html" class="text-slate-200 hover:text-cyan-300 transition-colors">About</a>
                 <a href="blog.html" class="text-slate-200 hover:text-cyan-300 transition-colors">Blog</a>
                 <a href="index.html#projects" class="text-slate-200 hover:text-cyan-300 transition-colors">Projects</a>
             </nav>
-
-            <!-- Mobile Menu Button -->
             <div class="md:hidden">
                 <button id="menu-btn" class="text-white focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="index.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Home</a>
             <a href="about.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">About</a>
@@ -94,6 +88,34 @@
             <a href="index.html#projects" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Projects</a>
         </div>
     </header>
+
+    <!-- Subscription Modal -->
+    <div id="subscribe-modal" class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex items-center justify-center p-4 z-50 hidden">
+        <div class="glass-card rounded-2xl shadow-2xl p-8 w-full max-w-md text-center relative">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="form-view">
+                <img src="logo.png" alt="logo" class="h-16 w-16 rounded-full mx-auto mb-4">
+                <p class="text-slate-300 mb-6">Get the latest posts and thoughts delivered to your inbox.</p>
+                <form id="subscribe-form">
+                    <input type="email" id="email-input" placeholder="Enter your email" class="w-full bg-gray-900/50 border border-slate-700 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 mb-4" required>
+                    <button id="submit-btn" type="submit" class="w-full bg-cyan-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-cyan-500 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <span id="submit-btn-text">Subscribe !!</span>
+                        <span id="submit-btn-loader" class="hidden">Subscribing...</span>
+                    </button>
+                </form>
+            </div>
+            <div id="success-view" class="hidden">
+                 <h2 class="text-2xl font-bold text-white mb-2">Thank You!</h2>
+                 <p class="text-slate-300">You've successfully subscribed. Welcome to the journey!</p>
+            </div>
+            <div id="error-view" class="hidden">
+                 <h2 class="text-2xl font-bold text-red-500 mb-2">Something Went Wrong</h2>
+                 <p class="text-slate-300">Could not subscribe at this time. Please try again later.</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content Area -->
     <main class="pt-32 pb-32 relative z-10">
@@ -110,11 +132,9 @@
                     <p>Few days back in a state of deep thought, a question came in my mind that, why am i even thinking so much ? what is the need of thinking deeply about something ? And then this lead me to an amazing and interesting journey of finding the answer to my question that is “why do we think ? ” .</p>
                     <p>And here’s what I found :-</p>
                     <p>So, let’s first understand, how our mind works. Basically, our mind is divided into two parts one that is <strong>conscious</strong> but lazy and another that is <strong>subconscious</strong> but active. Our mind always tries to do things in minimal energy uses, we can say that it is as lazy, as an orange cat sleeping on a couch !! Hence for most of the work, that we do in our daily life we rely on the <em>later</em> one, as most of our daily life is repetitive and doesn’t need much thinking and mental energy. But due to this we are also prone to making mistakes. The <em>former</em> one kicks in when we are in trouble, Like a complex life situation Or solving a maths problem Or dealing with something which is new to us and requires deep thinking. So, there is a constant oscillation between mental autopilot and deliberate reflection.</p>
-                    
                     <blockquote class="border-l-4 border-cyan-400 pl-4 italic text-slate-400">
                         <p>Rene Descartes who is also known as father of modern philosophy said – “cogito, ergo sum” which translates as “I think therefore I am”.</p>
                     </blockquote>
-                    
                     <p>Biologically, Thinking evolved because it gave us an advantage and helped early humans in various ways like:</p>
                     <ul class="list-disc list-inside space-y-1">
                         <li>To anticipate threats</li>
@@ -122,15 +142,22 @@
                         <li>Coordinate with others</li>
                     </ul>
                     <p>Which helped them to survive.</p>
-                    
                     <p>Where as, Philosophically, this question takes a quite interesting approach. It’s not just about how our brain works, but also to know what it means to be a human, to be aware, to seek meaning and to live consciously.</p>
-                    
                     <p>There are different thoughts about it, let’s look at few of them :-</p>
                     <p>For <strong>Descartes</strong>, doubt was the beginning of understanding something. He was strongly in favor of doubting everything, Like our senses, the outer world etc. According to him, one thing that can’t be doubted is ‘Thinking’.</p>
                     <p>According to <strong>Emmanuel Kant</strong>, our minds are active structures that shapes reality. We never access things as they are, directly. Our minds impose certain concepts to understand certain things around us.</p>
                     <p>There is a theory in existential philosophy that we humans have free-will, because we can think and act accordingly.</p>
-                    
                     <p>So, by this we can conclude that we think not only just for survival, but also to make sense of this otherwise meaningless life, to make choices and most importantly to solve problems of physics, mathematics and philosophy !!</p>
+                </div>
+
+                <!-- UPDATED: Subscribe Section with Wave Button -->
+                <div class="mt-12 pt-8 border-t border-slate-700 text-center">
+                    <h3 class="text-2xl font-bold text-white mb-4">Enjoyed the read?</h3>
+                    <p class="text-slate-300 mb-6">Join the journey and get new posts sent directly to you.</p>
+                    <button id="subscribe-btn-article" class="relative w-full max-w-xs mx-auto bg-gray-900 text-white font-bold py-4 px-8 rounded-lg overflow-hidden transition-transform transform hover:scale-105 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                        <canvas id="wave-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+                        <span class="relative z-10 text-lg tracking-wider">Subscribe</span>
+                    </button>
                 </div>
 
                 <div class="mt-12 text-center">
@@ -145,89 +172,167 @@
         <canvas id="fluid-background"></canvas>
     </footer>
 
-    <script>
+    <script type="module">
+        // --- Firebase SDK Imports ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- Firebase Configuration ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db;
+
+        // --- Initialize Firebase and Firestore ---
+        async function initializeFirebase() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                const auth = getAuth(app);
+                if (initialAuthToken) { await signInWithCustomToken(auth, initialAuthToken); } else { await signInAnonymously(auth); }
+                console.log("Firebase initialized and user signed in.");
+            } catch (error) { console.error("Error initializing Firebase:", error); }
+        }
+
+        // --- Modal Control ---
+        const subscribeBtnArticle = document.getElementById('subscribe-btn-article');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const subscribeModal = document.getElementById('subscribe-modal');
+        const subscribeForm = document.getElementById('subscribe-form');
+        const formView = document.getElementById('form-view');
+        const successView = document.getElementById('success-view');
+        const errorView = document.getElementById('error-view');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitBtnText = document.getElementById('submit-btn-text');
+        const submitBtnLoader = document.getElementById('submit-btn-loader');
+
+        const openModal = () => subscribeModal.classList.remove('hidden');
+        const closeModal = () => {
+            subscribeModal.classList.add('hidden');
+            setTimeout(() => {
+                formView.classList.remove('hidden');
+                successView.classList.add('hidden');
+                errorView.classList.add('hidden');
+            }, 300);
+        };
+
+        subscribeBtnArticle.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // --- Form Submission Logic ---
+        subscribeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            submitBtnText.classList.add('hidden');
+            submitBtnLoader.classList.remove('hidden');
+
+            if (!db) {
+                console.error("Firestore is not initialized.");
+                formView.classList.add('hidden');
+                errorView.classList.remove('hidden');
+                return;
+            }
+            
+            try {
+                await addDoc(collection(db, `/artifacts/${appId}/public/data/subscribers`), {
+                    email: document.getElementById('email-input').value,
+                    subscribedAt: serverTimestamp()
+                });
+                formView.classList.add('hidden');
+                successView.classList.remove('hidden');
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                formView.classList.add('hidden');
+                errorView.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtnText.classList.remove('hidden');
+                submitBtnLoader.classList.add('hidden');
+            }
+        });
+
         // --- Mobile Menu Toggle Script ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
         // --- Fluid Background Script for Footer ---
-        const canvas = document.getElementById('fluid-background');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        let time = 0;
-        let currentColor = { r: 12, g: 10, b: 29 };
-        const footerHeight = 80;
+        const footerCanvas = document.getElementById('fluid-background');
+        const footerCtx = footerCanvas.getContext('2d');
+        let footerParticles = [];
+        let footerTime = 0;
+        let footerCurrentColor = { r: 12, g: 10, b: 29 };
 
-        function setCanvasSize() {
-            canvas.width = window.innerWidth;
-            canvas.height = footerHeight;
+        function setFooterCanvasSize() {
+            footerCanvas.width = window.innerWidth;
+            footerCanvas.height = 80;
         }
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.radius = Math.random() * 30 + 15;
-                this.speedX = (Math.random() - 0.5) * 0.3;
-                this.speedY = (Math.random() - 0.5) * 0.3;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width + this.radius || this.x < -this.radius) { this.speedX *= -1; }
-                if (this.y > canvas.height + this.radius || this.y < -this.radius) { this.speedY *= -1; }
-            }
-            draw() {
-                ctx.beginPath();
-                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
-                gradient.addColorStop(0, `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0.6)`);
-                gradient.addColorStop(1, `rgba(${currentColor.r}, ${currentColor.g}, ${currentColor.b}, 0)`);
-                ctx.fillStyle = gradient;
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fill();
-            }
+        class FooterParticle {
+            constructor() { this.x = Math.random() * footerCanvas.width; this.y = Math.random() * footerCanvas.height; this.radius = Math.random() * 30 + 15; this.speedX = (Math.random() - 0.5) * 0.3; this.speedY = (Math.random() - 0.5) * 0.3; }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.x > footerCanvas.width + this.radius || this.x < -this.radius) { this.speedX *= -1; } if (this.y > footerCanvas.height + this.radius || this.y < -this.radius) { this.speedY *= -1; } }
+            draw() { footerCtx.beginPath(); const gradient = footerCtx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius); gradient.addColorStop(0, `rgba(${footerCurrentColor.r}, ${footerCurrentColor.g}, ${footerCurrentColor.b}, 0.6)`); gradient.addColorStop(1, `rgba(${footerCurrentColor.r}, ${footerCurrentColor.g}, ${footerCurrentColor.b}, 0)`); footerCtx.fillStyle = gradient; footerCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); footerCtx.fill(); }
         }
 
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < 30; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function handleParticles() {
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-            }
-        }
-
-        function updateColorOverTime() {
-            time += 0.003; // Speed of color change
-            const r = Math.abs(Math.sin(time * 0.8 + 0)) * 100 + 10;
-            const g = Math.abs(Math.sin(time * 0.5 + 2)) * 80 + 10;
-            const b = Math.abs(Math.sin(time * 0.3 + 4)) * 150 + 50;
-            currentColor = { r: Math.round(r), g: Math.round(g), b: Math.round(b) };
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            updateColorOverTime();
-            handleParticles();
-            requestAnimationFrame(animate);
-        }
+        function initFooterParticles() { footerParticles = []; for (let i = 0; i < 30; i++) { footerParticles.push(new FooterParticle()); } }
+        function handleFooterParticles() { footerParticles.forEach(p => { p.update(); p.draw(); }); }
+        function updateFooterColorOverTime() { footerTime += 0.003; const r = Math.abs(Math.sin(footerTime * 0.8 + 0)) * 100 + 10; const g = Math.abs(Math.sin(footerTime * 0.5 + 2)) * 80 + 10; const b = Math.abs(Math.sin(footerTime * 0.3 + 4)) * 150 + 50; footerCurrentColor = { r: Math.round(r), g: Math.round(g), b: Math.round(b) }; }
+        function animateFooter() { footerCtx.clearRect(0, 0, footerCanvas.width, footerCanvas.height); updateFooterColorOverTime(); handleFooterParticles(); requestAnimationFrame(animateFooter); }
         
+        // --- Wave Animation for Subscribe Button ---
+        const waveCanvas = document.getElementById('wave-canvas');
+        const waveCtx = waveCanvas.getContext('2d');
+        let waveTime = 0;
+
+        function setWaveCanvasSize() {
+            waveCanvas.width = waveCanvas.offsetWidth;
+            waveCanvas.height = waveCanvas.offsetHeight;
+        }
+
+        function animateWave() {
+            waveTime += 0.02;
+            waveCtx.clearRect(0, 0, waveCanvas.width, waveCanvas.height);
+            const gradient = waveCtx.createLinearGradient(0, 0, waveCanvas.width, 0);
+            gradient.addColorStop(0, '#ec4899');
+            gradient.addColorStop(0.5, '#8b5cf6');
+            gradient.addColorStop(1, '#06b6d4');
+            waveCtx.fillStyle = gradient;
+
+            for (let i = 0; i < 3; i++) {
+                waveCtx.beginPath();
+                const yOffset = waveCanvas.height * (0.3 + i * 0.15);
+                const amplitude = waveCanvas.height * 0.2;
+                for (let x = 0; x < waveCanvas.width; x++) {
+                    const y = Math.sin(x * 0.03 - waveTime + i * Math.PI / 2) * amplitude + yOffset;
+                    x === 0 ? waveCtx.moveTo(x, y) : waveCtx.lineTo(x, y);
+                }
+                waveCtx.lineTo(waveCanvas.width, waveCanvas.height);
+                waveCtx.lineTo(0, waveCanvas.height);
+                waveCtx.closePath();
+                waveCtx.globalAlpha = 0.4 + i * 0.1;
+                waveCtx.fill();
+            }
+            waveCtx.globalAlpha = 1.0;
+            requestAnimationFrame(animateWave);
+        }
+
+        // --- Initialize Everything ---
         window.addEventListener('resize', () => {
-            setCanvasSize();
-            initParticles();
+            setFooterCanvasSize();
+            initFooterParticles();
+            setWaveCanvasSize();
         });
 
-        setCanvasSize();
-        initParticles();
-        animate();
+        setFooterCanvasSize();
+        initFooterParticles();
+        animateFooter();
+        
+        setWaveCanvasSize();
+        animateWave();
+
+        initializeFirebase();
     </script>
 </body>
 </html>
