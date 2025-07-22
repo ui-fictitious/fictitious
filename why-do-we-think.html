@@ -63,7 +63,7 @@
     <header class="glass-card fixed top-0 left-0 right-0 z-30 shadow-lg">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <a href="index.html" class="flex items-center space-x-3 text-white hover:text-cyan-300 transition-colors">
-                <img src="logo.png" alt="logo" class="h-10 w-10 rounded-full self-center">
+                <img src="logo.png" alt="logo" class="h-10 w-10 rounded-full self-center" onerror="this.onerror=null;this.src='https://placehold.co/40x40/111827/FFFFFF?text=F';">
                 <div>
                     <span class="text-xl font-bold leading-tight">fictitious</span>
                     <span class="block text-xs text-slate-300 leading-tight">a boy lost in the cosmos</span>
@@ -96,7 +96,7 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
             <div id="form-view">
-                <img src="logo.png" alt="logo" class="h-16 w-16 rounded-full mx-auto mb-4">
+                <img src="logo.png" alt="logo" class="h-16 w-16 rounded-full mx-auto mb-4" onerror="this.onerror=null;this.src='https://placehold.co/64x64/111827/FFFFFF?text=F';">
                 <p class="text-slate-300 mb-6">Get the latest posts and thoughts delivered to your inbox.</p>
                 <form id="subscribe-form">
                     <input type="email" id="email-input" placeholder="Enter your email" class="w-full bg-gray-900/50 border border-slate-700 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 mb-4" required>
@@ -175,25 +175,30 @@
     <script type="module">
         // --- Firebase SDK Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- Firebase Configuration ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // --- Firebase Configuration (Your specific project) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDvwNsKNsVCHDgTStEvzrkTE8QWP831rPU",
+            authDomain: "webapp-6ac16.firebaseapp.com",
+            projectId: "webapp-6ac16",
+            storageBucket: "webapp-6ac16.appspot.com",
+            messagingSenderId: "357496327597",
+            appId: "1:357496327597:web:e95110ee68f4f9b1a7a524",
+            measurementId: "G-J691GR2M4G"
+        };
 
+        // --- Your specific User ID to link the form to your account ---
+        const ownerUserId = "iX85CVHoS2Nf55fO8GtxaQGJuuE2";
+        const appId = 'webapp-6ac16';
+
+        // --- Initialize Firebase ---
         let db;
-
-        // --- Initialize Firebase and Firestore ---
-        async function initializeFirebase() {
-            try {
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                const auth = getAuth(app);
-                if (initialAuthToken) { await signInWithCustomToken(auth, initialAuthToken); } else { await signInAnonymously(auth); }
-                console.log("Firebase initialized and user signed in.");
-            } catch (error) { console.error("Error initializing Firebase:", error); }
+        try {
+            const app = initializeApp(firebaseConfig, "blogPostSubscribeApp");
+            db = getFirestore(app);
+        } catch (error) {
+            console.error("Error initializing Firebase on blog post page:", error);
         }
 
         // --- Modal Control ---
@@ -201,6 +206,7 @@
         const closeModalBtn = document.getElementById('close-modal-btn');
         const subscribeModal = document.getElementById('subscribe-modal');
         const subscribeForm = document.getElementById('subscribe-form');
+        const emailInput = document.getElementById('email-input');
         const formView = document.getElementById('form-view');
         const successView = document.getElementById('success-view');
         const errorView = document.getElementById('error-view');
@@ -235,21 +241,28 @@
                 return;
             }
             
+            const email = emailInput.value.trim();
+            const subscribersPath = `/artifacts/${appId}/users/${ownerUserId}/subscribers`;
+            
             try {
-                await addDoc(collection(db, `/artifacts/${appId}/public/data/subscribers`), {
-                    email: document.getElementById('email-input').value,
-                    subscribedAt: serverTimestamp()
+                await addDoc(collection(db, subscribersPath), {
+                    email: email,
+                    subscribedAt: Timestamp.now()
                 });
                 formView.classList.add('hidden');
                 successView.classList.remove('hidden');
             } catch (error) {
-                console.error("Error adding document: ", error);
+                console.error("Error adding subscriber: ", error);
                 formView.classList.add('hidden');
                 errorView.classList.remove('hidden');
             } finally {
-                submitBtn.disabled = false;
-                submitBtnText.classList.remove('hidden');
-                submitBtnLoader.classList.add('hidden');
+                if (errorView.classList.contains('hidden')) {
+                     // On success, don't reset the button
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtnText.classList.remove('hidden');
+                    submitBtnLoader.classList.add('hidden');
+                }
             }
         });
 
@@ -332,7 +345,6 @@
         setWaveCanvasSize();
         animateWave();
 
-        initializeFirebase();
     </script>
 </body>
 </html>
