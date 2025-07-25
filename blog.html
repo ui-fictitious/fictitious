@@ -69,7 +69,6 @@
                 <a href="index.html" class="text-slate-200 hover:text-cyan-300 transition-colors">Home</a>
                 <a href="about.html" class="text-slate-200 hover:text-cyan-300 transition-colors">About</a>
                 <a href="blog.html" class="text-slate-200 hover:text-cyan-300 transition-colors">Blog</a>
-                <!-- CORRECTED: Link to projects.html -->
                 <a href="projects.html" class="text-slate-200 hover:text-cyan-300 transition-colors">Projects</a>
             </nav>
 
@@ -86,7 +85,6 @@
             <a href="index.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Home</a>
             <a href="about.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">About</a>
             <a href="blog.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Blog</a>
-            <!-- CORRECTED: Link to projects.html -->
             <a href="projects.html" class="block py-2 px-4 text-sm text-slate-200 hover:bg-gray-700">Projects</a>
         </div>
     </header>
@@ -137,7 +135,8 @@
     <!-- Main Content Area -->
     <main class="pt-32 pb-16">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
+            <!-- UPDATED: Added responsive padding to prevent overlap on mobile -->
+            <div class="text-center mb-16 pr-20 md:pr-0">
                 <h1 class="text-4xl md:text-5xl font-bold text-white">Cosmic Chronicles</h1>
                 <p class="text-slate-300 mt-2">A collection of thoughts on science, philosophy, and everything in between.</p>
             </div>
@@ -175,21 +174,24 @@
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         let db;
+        let auth;
 
         // --- Initialize Firebase and Firestore ---
         async function initializeFirebase() {
             try {
                 const app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
-                const auth = getAuth(app);
+                auth = getAuth(app);
                 if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
                 } else {
                     await signInAnonymously(auth);
                 }
                 console.log("Firebase initialized and user signed in.");
+                return true;
             } catch (error) {
                 console.error("Error initializing Firebase:", error);
+                return false;
             }
         }
 
@@ -223,33 +225,48 @@
         subscribeForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            // Show loading state
             submitBtn.disabled = true;
             submitBtnText.classList.add('hidden');
             submitBtnLoader.classList.remove('hidden');
 
-            if (!db) {
-                console.error("Firestore is not initialized.");
+            if (!db || !auth) {
+                console.error("Firestore or Auth is not initialized.");
                 formView.classList.add('hidden');
                 errorView.classList.remove('hidden');
                 return;
             }
+            
             const email = emailInput.value;
             
             try {
-                const docRef = await addDoc(collection(db, `/artifacts/${appId}/public/data/subscribers`), {
+                await addDoc(collection(db, `/artifacts/${appId}/public/data/subscribers`), {
                     email: email,
                     subscribedAt: serverTimestamp()
                 });
-                console.log("Subscriber added with ID: ", docRef.id);
+                console.log("Subscriber added successfully.");
                 formView.classList.add('hidden');
                 successView.classList.remove('hidden');
+
             } catch (error) {
-                console.error("Error adding document: ", error);
-                formView.classList.add('hidden');
-                errorView.classList.remove('hidden');
+                console.error("Error adding document, possibly due to expired token:", error);
+                
+                console.log("Attempting to re-authenticate and retry...");
+                try {
+                    await signInAnonymously(auth);
+                    console.log("Re-authenticated successfully.");
+                    await addDoc(collection(db, `/artifacts/${appId}/public/data/subscribers`), {
+                        email: email,
+                        subscribedAt: serverTimestamp()
+                    });
+                    console.log("Subscriber added on retry.");
+                    formView.classList.add('hidden');
+                    successView.classList.remove('hidden');
+                } catch (retryError) {
+                    console.error("Error on retry:", retryError);
+                    formView.classList.add('hidden');
+                    errorView.classList.remove('hidden');
+                }
             } finally {
-                // Reset button state
                 submitBtn.disabled = false;
                 submitBtnText.classList.remove('hidden');
                 submitBtnLoader.classList.add('hidden');
